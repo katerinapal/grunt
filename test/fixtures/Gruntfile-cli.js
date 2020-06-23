@@ -1,4 +1,5 @@
-module.exports = function(grunt) {
+var encapsulated_anonymus;
+encapsulated_anonymus = function(grunt) {
 
   var obj = {};
   grunt.registerTask('finalize', 'Print all option values.', function() {

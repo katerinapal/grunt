@@ -1,6 +1,5 @@
+import { grunt as libgrunt_gruntjs } from "../../lib/grunt";
 'use strict';
-
-var grunt = require('../../lib/grunt');
 
 // Parse options printed by fixtures/Gruntfile-cli into an object.
 var optionValueRe = /###(.*?)###/;
@@ -9,10 +8,12 @@ function getOptionValues(str) {
   return matches ? JSON.parse(matches[1]) : {};
 }
 
-exports.cli = {
+var cli;
+
+cli = {
   '--debug taskname': function(test) {
     test.expect(1);
-    grunt.util.spawn({
+    libgrunt_gruntjs.util.spawn({
       grunt: true,
       args: ['--gruntfile', 'test/fixtures/Gruntfile-cli.js', '--debug', 'debug', 'finalize'],
     }, function(err, result) {
@@ -22,7 +23,7 @@ exports.cli = {
   },
   'taskname --debug': function(test) {
     test.expect(1);
-    grunt.util.spawn({
+    libgrunt_gruntjs.util.spawn({
       grunt: true,
       args: ['--gruntfile', 'test/fixtures/Gruntfile-cli.js', 'debug', '--debug', 'finalize'],
     }, function(err, result) {
@@ -32,7 +33,7 @@ exports.cli = {
   },
   '--debug --verbose': function(test) {
     test.expect(1);
-    grunt.util.spawn({
+    libgrunt_gruntjs.util.spawn({
       grunt: true,
       args: ['--gruntfile', 'test/fixtures/Gruntfile-cli.js', '--debug', '--verbose', 'debug', 'verbose', 'finalize'],
     }, function(err, result) {
@@ -42,7 +43,7 @@ exports.cli = {
   },
   '--verbose --debug': function(test) {
     test.expect(1);
-    grunt.util.spawn({
+    libgrunt_gruntjs.util.spawn({
       grunt: true,
       args: ['--gruntfile', 'test/fixtures/Gruntfile-cli.js', '--verbose', '--debug', 'debug', 'verbose', 'finalize'],
     }, function(err, result) {

@@ -1,6 +1,7 @@
+import { grunt as libgrunt_gruntjs } from "../../lib/grunt";
 'use strict';
 
-var grunt = require('../../lib/grunt');
+var task.normalizeMultiTaskFiles;
 
 exports['task.normalizeMultiTaskFiles'] = {
   setUp: function(done) {
@@ -15,11 +16,11 @@ exports['task.normalizeMultiTaskFiles'] = {
   'normalize': function(test) {
     test.expect(7);
     var actual, expected, key, value;
-    var flatten = grunt.util._.flatten;
+    var flatten = libgrunt_gruntjs.util._.flatten;
 
     key = 'dist/built.js';
     value = 'src/*1.js';
-    actual = grunt.task.normalizeMultiTaskFiles(value, key);
+    actual = libgrunt_gruntjs.task.normalizeMultiTaskFiles(value, key);
     expected = [
       {
         dest: 'dist/built.js',
@@ -31,7 +32,7 @@ exports['task.normalizeMultiTaskFiles'] = {
 
     key = 'dist/built.js';
     value = [['src/*1.js'], ['src/*2.js']];
-    actual = grunt.task.normalizeMultiTaskFiles(value, key);
+    actual = libgrunt_gruntjs.task.normalizeMultiTaskFiles(value, key);
     expected = [
       {
         dest: 'dist/built.js',
@@ -45,7 +46,7 @@ exports['task.normalizeMultiTaskFiles'] = {
       src: ['src/*1.js', 'src/*2.js'],
       dest: 'dist/built.js'
     };
-    actual = grunt.task.normalizeMultiTaskFiles(value, 'ignored');
+    actual = libgrunt_gruntjs.task.normalizeMultiTaskFiles(value, 'ignored');
     expected = [
       {
         dest: 'dist/built.js',
@@ -61,7 +62,7 @@ exports['task.normalizeMultiTaskFiles'] = {
         'dist/built-b.js': ['src/*1.js', [['src/*2.js']]]
       }
     };
-    actual = grunt.task.normalizeMultiTaskFiles(value, 'ignored');
+    actual = libgrunt_gruntjs.task.normalizeMultiTaskFiles(value, 'ignored');
     expected = [
       {
         dest: 'dist/built-a.js',
@@ -82,7 +83,7 @@ exports['task.normalizeMultiTaskFiles'] = {
         {'dist/built-b.js': [[['src/*1.js'], 'src/*2.js']]}
       ]
     };
-    actual = grunt.task.normalizeMultiTaskFiles(value, 'ignored');
+    actual = libgrunt_gruntjs.task.normalizeMultiTaskFiles(value, 'ignored');
     expected = [
       {
         dest: 'dist/built-a.js',
@@ -103,7 +104,7 @@ exports['task.normalizeMultiTaskFiles'] = {
         {dest: 'dist/built-b.js', src: ['src/*1.js', 'src/*2.js']}
       ]
     };
-    actual = grunt.task.normalizeMultiTaskFiles(value, 'ignored');
+    actual = libgrunt_gruntjs.task.normalizeMultiTaskFiles(value, 'ignored');
     expected = [
       {
         dest: 'dist/built-a.js',
@@ -124,7 +125,7 @@ exports['task.normalizeMultiTaskFiles'] = {
         {dest: 'dist/built-b.js', src: ['src/*1.js', 'src/*2.js'], foo: 456, bar: null}
       ]
     };
-    actual = grunt.task.normalizeMultiTaskFiles(value, 'ignored');
+    actual = libgrunt_gruntjs.task.normalizeMultiTaskFiles(value, 'ignored');
     expected = [
       {
         dest: 'dist/built-a.js',
@@ -153,7 +154,7 @@ exports['task.normalizeMultiTaskFiles'] = {
       src: ['src/xxx*.js', 'src/yyy*.js'],
       dest: 'dist/built.js',
     };
-    actual = grunt.task.normalizeMultiTaskFiles(value, 'ignored');
+    actual = libgrunt_gruntjs.task.normalizeMultiTaskFiles(value, 'ignored');
     expected = [
       {
         dest: value.dest,
@@ -168,7 +169,7 @@ exports['task.normalizeMultiTaskFiles'] = {
       dest: 'dist/built.js',
       nonull: true,
     };
-    actual = grunt.task.normalizeMultiTaskFiles(value, 'ignored');
+    actual = libgrunt_gruntjs.task.normalizeMultiTaskFiles(value, 'ignored');
     expected = [
       {
         dest: value.dest,
@@ -190,7 +191,7 @@ exports['task.normalizeMultiTaskFiles'] = {
         {dest: 'dist/', src: ['file?.js'], expand: true, cwd: 'src'},
       ]
     };
-    actual = grunt.task.normalizeMultiTaskFiles(value, 'ignored');
+    actual = libgrunt_gruntjs.task.normalizeMultiTaskFiles(value, 'ignored');
     expected = [
       {
         dest: 'dist/src/file1.js', src: ['src/file1.js'],
@@ -216,7 +217,7 @@ exports['task.normalizeMultiTaskFiles'] = {
         {dest: 'dist/', src: ['src/file?.js'], expand: true, flatten: true},
       ]
     };
-    actual = grunt.task.normalizeMultiTaskFiles(value, 'ignored');
+    actual = libgrunt_gruntjs.task.normalizeMultiTaskFiles(value, 'ignored');
     expected = [
       {
         dest: 'dist/file1.js', src: ['src/file1.js'],
@@ -241,7 +242,7 @@ exports['task.normalizeMultiTaskFiles'] = {
         },
       ]
     };
-    actual = grunt.task.normalizeMultiTaskFiles(value, 'ignored');
+    actual = libgrunt_gruntjs.task.normalizeMultiTaskFiles(value, 'ignored');
     expected = [
       {
         dest: 'dist/min/src/file1.min.js', src: ['src/file1.js'],

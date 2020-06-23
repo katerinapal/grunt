@@ -1,16 +1,18 @@
+import ext_gruntlegacylog_gruntlegacylog from "grunt-legacy-log";
+import ext_assert_assert from "assert";
+import ext_through2_through from "through2";
 'use strict';
 
-var Log = require('grunt-legacy-log').Log;
-var assert = require('assert');
-var through = require('through2');
+var Log = ext_gruntlegacylog_gruntlegacylog.Log;
+var encapsulated_anonymus;
 
-module.exports = function(grunt) {
+encapsulated_anonymus = function(grunt) {
   grunt.file.setBase('../fixtures/load-npm-tasks');
 
   // Create a custom log to assert output
   var stdout = [];
   var oldlog = grunt.log;
-  var stream = through(function(data, enc, next) {
+  var stream = ext_through2_through(function(data, enc, next) {
     stdout.push(data.toString());
     next(null, data);
   });
@@ -32,7 +34,7 @@ module.exports = function(grunt) {
     grunt.log = oldlog;
     stdout = stdout.join('\n');
     try {
-      assert.ok(stdout.indexOf('foo has ran.') !== -1, 'oh-four task should have ran.');
+      ext_assert_assert.ok(stdout.indexOf('foo has ran.') !== -1, 'oh-four task should have ran.');
     } catch (err) {
       grunt.log.subhead(err.message);
       grunt.log.error('Expected ' + err.expected + ' but actually: ' + err.actual);

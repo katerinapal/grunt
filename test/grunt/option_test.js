@@ -1,41 +1,42 @@
+import { grunt as libgrunt_gruntjs } from "../../lib/grunt";
 'use strict';
 
-var grunt = require('../../lib/grunt');
+var option;
 
-exports.option = {
+option = {
   setUp: function(done) {
-    grunt.option.init();
+    libgrunt_gruntjs.option.init();
     done();
   },
   tearDown: function(done) {
-    grunt.option.init();
+    libgrunt_gruntjs.option.init();
     done();
   },
   'option.init': function(test) {
     test.expect(1);
     var expected = {foo: 'bar', bool: true, 'bar': {foo: 'bar'}};
-    test.deepEqual(grunt.option.init(expected), expected);
+    test.deepEqual(libgrunt_gruntjs.option.init(expected), expected);
     test.done();
   },
   'option': function(test) {
     test.expect(4);
-    test.equal(grunt.option('foo', 'bar'), grunt.option('foo'));
-    grunt.option('foo', {foo: 'bar'});
-    test.deepEqual(grunt.option('foo'), {foo: 'bar'});
-    test.equal(grunt.option('no-there'), false);
-    grunt.option('there', false);
-    test.equal(grunt.option('no-there'), true);
+    test.equal(libgrunt_gruntjs.option('foo', 'bar'), libgrunt_gruntjs.option('foo'));
+    libgrunt_gruntjs.option('foo', {foo: 'bar'});
+    test.deepEqual(libgrunt_gruntjs.option('foo'), {foo: 'bar'});
+    test.equal(libgrunt_gruntjs.option('no-there'), false);
+    libgrunt_gruntjs.option('there', false);
+    test.equal(libgrunt_gruntjs.option('no-there'), true);
     test.done();
   },
   'option.flags': function(test) {
     test.expect(1);
-    grunt.option.init({
+    libgrunt_gruntjs.option.init({
       foo: 'bar',
       there: true,
       obj: {foo: 'bar'},
       arr: []
     });
-    test.deepEqual(grunt.option.flags(), ['--foo=bar', '--there', '--obj=[object Object]']);
+    test.deepEqual(libgrunt_gruntjs.option.flags(), ['--foo=bar', '--there', '--obj=[object Object]']);
     test.done();
   },
 };

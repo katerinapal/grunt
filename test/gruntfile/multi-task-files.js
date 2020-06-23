@@ -1,9 +1,13 @@
+import ext_assert_assert from "assert";
+import ext_difflet_difflet from "difflet";
 // For now, run this "test suite" with:
 // grunt --gruntfile ./test/gruntfile/multi-task-files.js
 
 'use strict';
 
-module.exports = function(grunt) {
+var encapsulated_anonymus;
+
+encapsulated_anonymus = function(grunt) {
   grunt.file.setBase('../fixtures/files');
 
   grunt.initConfig({
@@ -388,8 +392,7 @@ module.exports = function(grunt) {
     },
   };
 
-  var assert = require('assert');
-  var difflet = require('difflet')({indent: 2, comment: true});
+  var difflet = ext_difflet_difflet({indent: 2, comment: true});
   var test = function(name, fn) {
     try {
       fn();
@@ -407,7 +410,7 @@ module.exports = function(grunt) {
     var expected = all ? expecteds : expecteds[key];
 
     test(this.name, function() {
-      assert.deepEqual(actual, expected, 'Actual should match expected.');
+      ext_assert_assert.deepEqual(actual, expected, 'Actual should match expected.');
     });
 
     if (all) {
@@ -419,10 +422,10 @@ module.exports = function(grunt) {
 
   grunt.registerTask('test:counters', 'Test function execution order.', function() {
     test(this.name, function() {
-      assert.equal(counters.length, counter + 1, 'Task functions should have run the correct number of times.');
+      ext_assert_assert.equal(counters.length, counter + 1, 'Task functions should have run the correct number of times.');
       var expected = [];
       for (var i = 0; i < counters.length; i++) { expected.push(i); }
-      assert.deepEqual(counters, expected, 'Task functions should have actually executed in-order.');
+      ext_assert_assert.deepEqual(counters, expected, 'Task functions should have actually executed in-order.');
     });
   });
 
@@ -453,5 +456,4 @@ module.exports = function(grunt) {
     'test:all',
     'test:counters',
   ]);
-
 };
