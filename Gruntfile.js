@@ -14,11 +14,11 @@ module.exports = function(grunt) {
         }
       }
     },
-    eslint: {
-      gruntfile_tasks: ['Gruntfile.js', 'internal-tasks/*.js'],
-      libs_n_tests: ['lib/**/*.js', '<%= nodeunit.all %>'],
-      subgrunt: ['<%= subgrunt.all %>']
-    },
+    // eslint: {
+    //   gruntfile_tasks: ['Gruntfile.js', 'internal-tasks/*.js'],
+    //   libs_n_tests: ['lib/**/*.js', '<%= nodeunit.all %>'],
+    //   subgrunt: ['<%= subgrunt.all %>']
+    // },
     watch: {
       gruntfile_tasks: {
         files: ['<%= eslint.gruntfile_tasks %>'],
@@ -39,7 +39,7 @@ module.exports = function(grunt) {
   });
 
   // These plugins provide necessary tasks.
-  grunt.loadNpmTasks('grunt-eslint');
+  // grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
@@ -48,7 +48,7 @@ module.exports = function(grunt) {
 
   // "npm test" runs these tasks
   grunt.registerTask('test', '', function(reporter) {
-    grunt.task.run(['eslint', 'nodeunit:' + (reporter || 'all'), 'subgrunt']);
+    grunt.task.run(['nodeunit:' + (reporter || 'all'), 'subgrunt']);
   });
 
   // Default task.
